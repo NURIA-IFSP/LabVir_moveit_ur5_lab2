@@ -19,7 +19,7 @@ sudo apt update
 # 3. Verificação de dependências dos pacotes
 echo "### rosdep update ###"
 rosdep update
-cd  /LabVir_moveit_ur10_lab1/catkin_ws
+cd  /LabVir_moveit_ur5_lab2/catkin_ws
 echo "### rosdep install ###"
 rosdep install --from-paths src --ignore-src -r -y
 
