@@ -1,0 +1,4 @@
+industrial_environment
+/LabVir_moveit_ur10_lab1/catkin_ws/devel/.private/industrial_environment/share/industrial_environment/cmake/industrial_environmentConfig-version.cmake /LabVir_moveit_ur10_lab1/catkin_ws/devel/share/industrial_environment/cmake/industrial_environmentConfig-version.cmake
+/LabVir_moveit_ur10_lab1/catkin_ws/devel/.private/industrial_environment/share/industrial_environment/cmake/industrial_environmentConfig.cmake /LabVir_moveit_ur10_lab1/catkin_ws/devel/share/industrial_environment/cmake/industrial_environmentConfig.cmake
+/LabVir_moveit_ur10_lab1/catkin_ws/devel/.private/industrial_environment/lib/pkgconfig/industrial_environment.pc /LabVir_moveit_ur10_lab1/catkin_ws/devel/lib/pkgconfig/industrial_environment.pc
