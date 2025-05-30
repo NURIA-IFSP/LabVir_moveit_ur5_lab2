@@ -8,4 +8,4 @@ moveit_setup_assistant_config:
   CONFIG:
     author_name: learnroboticswros
     author_email: ros.master.ai@gmail.com
-    generated_timestamp: 1718873452
+    generated_timestamp: 1748534529

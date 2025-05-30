@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- Associate to the robot description parameter, the urdf file that model the robot-->
+    <param name="ur10/robot_description" command = "$(find xacro)/xacro $(find ur10_robot)/urdf/ur10_urdf.xacro" />
+
+    <!-- Set the position in empty world-->
+    <arg name="x" default="0" />
+    <arg name="y" default="0" />
+    <arg name="z" default="0.5" />
+
+    <!-- Launch Gazebo world -->
+    <include file = "$(find gazebo_ros)/launch/empty_world.launch" >
+        <arg name="use_sim_time" value="true"/>
+        <arg name="debug" value="false"/>
+        <arg name="gui" value="true"/>
+        <arg name="paused" value="true"/>
+    </include>   
+
+    <!-- Spawn the robot in Gazebo -->
+    <node name="spawn_the_robot" pkg="gazebo_ros" type="spawn_model" output="screen"
+          args="-urdf -param ur10/robot_description -model ur10 -x $(arg x) -y $(arg y) -z $(arg z)"/>
+
+    <!-- Load controllers -->
+    <rosparam command="load" file="$(find ur10_robot)/config/ur10_eff_controllers.yaml"/>
+
+    <node name="controller_spawner" pkg="controller_manager" type="spawner"
+          output="screen" respawn="false" ns="/ur10"
+          args="joint_state_controller eff_joint_traj_controller --timeout 60"/>
+
+    <!-- Robot state publisher -->
+    <group ns="ur10">
+        <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+              output="screen" respawn="false"/>
+    </group>
+
+    <!-- MoveIt config -->
+    <group ns="ur10">
+         <rosparam file="$(find ur10_eff_moveit_config)/config/ros_controllers.yaml" command="load"/>
+        
+        <include file="$(find ur10_eff_moveit_config)/launch/planning_context.launch">
+            <arg name="load_robot_description" value="false"/>
+        </include>
+
+        <include file="$(find ur10_eff_moveit_config)/launch/move_group.launch">
+            <arg name="publish_monitored_planning_scene" value="true"/>
+        </include>
+
+        <include file="$(find ur10_eff_moveit_config)/launch/moveit_rviz.launch">
+            <arg name="rviz_config" value="$(find ur10_eff_moveit_config)/launch/moveit.rviz"/>
+        </include>
+    </group>
+
+</launch>
